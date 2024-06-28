@@ -3,6 +3,7 @@ import { useState } from "react";
 import { MealType } from "./types";
 import AddPostMeal from "./components/AddPostMeal";
 import Logo from "./components/Logo";
+import Meals from "./components/Meals";
 
 function App() {
   const [meals, setMeals] = useState<MealType[] | []>([]);
@@ -15,8 +16,7 @@ function App() {
     <main className="max-w-[1650px] px-6 ">
       <Logo />
       <AddPostMeal addNewMeal={addNewMeal} />
-
-      {meals.length > 0 && JSON.stringify(meals)}
+      <Meals meals={meals} />
     </main>
   );
 }
