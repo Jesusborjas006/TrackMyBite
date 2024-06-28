@@ -8,12 +8,30 @@ function App() {
     calories: "",
   });
 
-  console.log(meal);
+  console.log(meals);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     setMeal({ ...meal, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (meal.food && meal.quantity && meal.calories) {
+      const newMeal = {
+        id: Date.now(),
+        food: meal.food,
+        quantity: meal.quantity,
+        calories: meal.calories,
+      };
+      addToMeals(newMeal);
+    }
+  };
+
+  const addToMeals = (newMeal) => {
+    setMeals([...meals, newMeal]);
   };
 
   return (
@@ -50,7 +68,9 @@ function App() {
             onChange={handleChange}
           />
         </label>
+        <button onClick={handleSubmit}>Add Meal</button>
       </form>
+      {JSON.stringify(meals)}
     </>
   );
 }
