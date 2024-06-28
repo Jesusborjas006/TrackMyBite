@@ -12,11 +12,18 @@ function App() {
     setMeals([...meals, newMeal]);
   };
 
+  const removeMeal = (id: number) => {
+    const filteredMeals = meals.filter((meal) => {
+      return meal.id !== id;
+    });
+    setMeals(filteredMeals);
+  };
+
   return (
     <main className="max-w-[1650px] px-6 ">
       <Logo />
       <AddPostMeal addNewMeal={addNewMeal} />
-      <Meals meals={meals} />
+      <Meals meals={meals} removeMeal={removeMeal} />
     </main>
   );
 }
