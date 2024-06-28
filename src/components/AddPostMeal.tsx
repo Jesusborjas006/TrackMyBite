@@ -33,10 +33,11 @@ const AddPostMeal = ({ addNewMeal }: AddPostMealProps) => {
   };
 
   return (
-    <form>
+    <form className="flex justify-center gap-x-4 mt-10">
       <label htmlFor="food">
         Food:
         <input
+          className="border border-black ml-1"
           id="food"
           type="text"
           name="food"
@@ -48,6 +49,7 @@ const AddPostMeal = ({ addNewMeal }: AddPostMealProps) => {
       <label htmlFor="quantity">
         Quantity:
         <select
+          className="border border-black ml-1"
           id="qauntity"
           name="quantity"
           value={meal.quantity}
@@ -62,6 +64,7 @@ const AddPostMeal = ({ addNewMeal }: AddPostMealProps) => {
       <label htmlFor="calories">
         Calories:
         <input
+          className="border border-black ml-1 w-[100px]"
           id="calories"
           type="number"
           name="calories"
@@ -70,7 +73,9 @@ const AddPostMeal = ({ addNewMeal }: AddPostMealProps) => {
         />
       </label>
 
-      <button onClick={onSubmit}>Add Meal</button>
+      <button className="border border-black px-2" onClick={onSubmit}>
+        Add Meal
+      </button>
     </form>
   );
 };
