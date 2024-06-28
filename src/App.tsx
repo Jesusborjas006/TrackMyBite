@@ -1,7 +1,7 @@
 function App() {
   return (
     <>
-      <h1>TrackMyBite</h1>
+      <h1>Track My Bite</h1>
     </>
   );
 }
