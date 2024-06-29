@@ -1,4 +1,5 @@
 import { MealType } from "../types";
+import DateWidget from "./DateWidget";
 
 interface MealsProps {
   meals: [] | MealType[];
@@ -19,10 +20,12 @@ const Meals = ({ meals, removeMeal }: MealsProps) => {
       </button>
     </li>
   ));
+
   return (
-    <section className="flex flex-col items-center justify-center border border-red-400 mt-10">
-      <h3 className="font-bold text-2xl">Today's Meals</h3>
-      <ul>{mealElements}</ul>
+    <section className="flex flex-col items-center justify-center mt-10">
+      <h3 className="font-bold text-2xl mb-2">Today's Meals</h3>
+      <DateWidget />
+      <ul className="space-y-3 mt-14">{mealElements}</ul>
     </section>
   );
 };
