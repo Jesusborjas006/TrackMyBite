@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { MealType } from "./types";
+import AddPostMeal from "./components/AddPostMeal";
+import Logo from "./components/Logo";
+import Meals from "./components/Meals";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [meals, setMeals] = useState<MealType[]>([
+    {
+      id: 1,
+      food: "potato",
+      quantity: 1,
+      calories: "100",
+    },
+    {
+      id: 2,
+      food: "nuggets",
+      quantity: 3,
+      calories: "180",
+    },
+    {
+      id: 3,
+      food: "watermelon",
+      quantity: 1,
+      calories: "50",
+    },
+  ]);
+
+  const addNewMeal = (newMeal: MealType) => {
+    setMeals([...meals, newMeal]);
+  };
+
+  const removeMeal = (id: number) => {
+    const filteredMeals = meals.filter((meal) => {
+      return meal.id !== id;
+    });
+    setMeals(filteredMeals);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <main className="max-w-[1650px] px-6 ">
+      <Logo />
+      <AddPostMeal addNewMeal={addNewMeal} />
+      <Meals meals={meals} removeMeal={removeMeal} />
+    </main>
+  );
 }
 
-export default App
+export default App;
