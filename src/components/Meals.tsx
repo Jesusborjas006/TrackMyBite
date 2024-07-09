@@ -11,7 +11,8 @@ const Meals = ({ meals, removeMeal }: MealsProps) => {
     <li key={meal.id}>
       <span className="font-semibold">Food:</span> {meal.food}{" "}
       <span className="font-semibold">Quantity:</span> {meal.quantity}{" "}
-      <span className="font-semibold">Calories:</span> {meal.calories}
+      <span className="font-semibold">Total Calories:</span>{" "}
+      {meal.quantity * Number(meal.calories)}
       <button
         className="border border-black px-2 ml-2"
         onClick={() => removeMeal(meal.id)}

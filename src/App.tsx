@@ -38,6 +38,14 @@ function App() {
     setMeals(filteredMeals);
   };
 
+  // console.log(meals);
+
+  // const totalCalorieIntake = meals.reduce((meal, current) => {
+  //   return (meal += Number(current.calories));
+  // }, 0);
+
+  // console.log(totalCalorieIntake);
+
   return (
     <main className="max-w-[1650px] px-6 ">
       <Logo />
