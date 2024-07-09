@@ -38,6 +38,8 @@ const Meals = ({ meals, removeMeal }: MealsProps) => {
         <h3 className="mt-10 text-3xl">
           Calories Remaining: {caloriesRemaining - totalMealCalories}
         </h3>
+        <p>Goal: {caloriesRemaining} calories</p>
+        <p>Food: {totalMealCalories} calories</p>
       </div>
     </section>
   );
