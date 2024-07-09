@@ -3,7 +3,6 @@ import { MealType } from "./types";
 import AddPostMeal from "./components/AddPostMeal";
 import Logo from "./components/Logo";
 import Meals from "./components/Meals";
-import DateWidget from "./components/DateWidget";
 
 function App() {
   const [meals, setMeals] = useState<MealType[]>([

@@ -62,7 +62,7 @@ const AddPostMeal = ({ addNewMeal }: AddPostMealProps) => {
       </label>
 
       <label htmlFor="calories">
-        Calories:
+        Calories Per Item:
         <input
           className="border border-black ml-1 w-[100px]"
           id="calories"
