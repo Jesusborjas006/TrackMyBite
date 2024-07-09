@@ -1,33 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MealType } from "./types";
 import AddPostMeal from "./components/AddPostMeal";
 import Logo from "./components/Logo";
 import Meals from "./components/Meals";
 
 function App() {
-  const [meals, setMeals] = useState<MealType[]>([
-    {
-      id: 1,
-      food: "potato",
-      quantity: 1,
-      calories: "100",
-    },
-    {
-      id: 2,
-      food: "nuggets",
-      quantity: 3,
-      calories: "180",
-    },
-    {
-      id: 3,
-      food: "watermelon",
-      quantity: 1,
-      calories: "50",
-    },
-  ]);
+  const [meals, setMeals] = useState<MealType[]>([]);
+  const [caloriesRemaining, setCaloriesRemaining] = useState(2000);
+  const [totalMealCalories, setTotalMealCalories] = useState(0);
+
+  useEffect(() => {
+    const totalCalorieIntake = meals.reduce((acc, currentMeal) => {
+      return (acc += currentMeal.quantity * Number(currentMeal.calories));
+    }, 0);
+    setTotalMealCalories(totalCalorieIntake);
+    setCaloriesRemaining(2000 - totalCalorieIntake);
+  }, [meals]);
 
   const addNewMeal = (newMeal: MealType) => {
-    setMeals([...meals, newMeal]);
+    setMeals((prevMeals) => [...prevMeals, newMeal]);
   };
 
   const removeMeal = (id: number) => {
@@ -42,7 +33,12 @@ function App() {
       <Logo />
 
       <AddPostMeal addNewMeal={addNewMeal} />
-      <Meals meals={meals} removeMeal={removeMeal} />
+      <Meals
+        meals={meals}
+        removeMeal={removeMeal}
+        caloriesRemaining={caloriesRemaining}
+        totalMealCalories={totalMealCalories}
+      />
     </main>
   );
 }

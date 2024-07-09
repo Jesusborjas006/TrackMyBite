@@ -1,18 +1,19 @@
-import { useState } from "react";
 import { MealType } from "../types";
 import DateWidget from "./DateWidget";
 
 interface MealsProps {
   meals: [] | MealType[];
   removeMeal: (id: number) => void;
+  caloriesRemaining: number;
+  totalMealCalories: number;
 }
 
-const Meals = ({ meals, removeMeal }: MealsProps) => {
-  const [caloriesRemaining] = useState(2000);
-  const totalMealCalories = meals.reduce((meal, current) => {
-    return (meal += current.quantity * Number(current.calories));
-  }, 0);
-
+const Meals = ({
+  meals,
+  removeMeal,
+  caloriesRemaining,
+  totalMealCalories,
+}: MealsProps) => {
   const mealElements = meals.map((meal) => (
     <li key={meal.id}>
       <span className="font-semibold">Food:</span> {meal.food}{" "}
@@ -28,6 +29,13 @@ const Meals = ({ meals, removeMeal }: MealsProps) => {
     </li>
   ));
 
+  let content;
+  if (caloriesRemaining === 0) {
+    content = <p>Goal has been met!</p>;
+  } else {
+    content = <p>Calories Remaining: {caloriesRemaining}</p>;
+  }
+
   return (
     <section className="flex flex-col items-center justify-center mt-10">
       <h3 className="font-bold text-2xl mb-2">Today's Meals</h3>
@@ -35,9 +43,7 @@ const Meals = ({ meals, removeMeal }: MealsProps) => {
       <ul className="space-y-3 mt-14">{mealElements}</ul>
 
       <div>
-        <h3 className="mt-10 text-3xl">
-          Calories Remaining: {caloriesRemaining - totalMealCalories}
-        </h3>
+        <h3 className="mt-10 text-3xl">{content}</h3>
         <p>Goal: {caloriesRemaining} calories</p>
         <p>Food: {totalMealCalories} calories</p>
       </div>
