@@ -3,6 +3,9 @@ import { MealType } from "./types";
 import AddPostMeal from "./components/AddPostMeal";
 import Logo from "./components/Logo";
 import Meals from "./components/Meals";
+import { AuthProvider } from "./context/AuthContext";
+import Login from "./components/Login";
+import Logout from "./components/Logout";
 
 function App() {
   const [meals, setMeals] = useState<MealType[]>([]);
@@ -30,15 +33,19 @@ function App() {
 
   return (
     <main className="max-w-[1650px] px-6 ">
-      <Logo />
+      <AuthProvider>
+        <Logo />
 
-      <AddPostMeal addNewMeal={addNewMeal} />
-      <Meals
-        meals={meals}
-        removeMeal={removeMeal}
-        caloriesRemaining={caloriesRemaining}
-        totalMealCalories={totalMealCalories}
-      />
+        <AddPostMeal addNewMeal={addNewMeal} />
+        <Meals
+          meals={meals}
+          removeMeal={removeMeal}
+          caloriesRemaining={caloriesRemaining}
+          totalMealCalories={totalMealCalories}
+        />
+        <Login />
+        <Logout />
+      </AuthProvider>
     </main>
   );
 }
