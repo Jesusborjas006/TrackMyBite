@@ -25,6 +25,7 @@ function App() {
       calories: "50",
     },
   ]);
+  const [caloriesRemaining, setCaloriesRemaining] = useState(2000);
 
   const addNewMeal = (newMeal: MealType) => {
     setMeals([...meals, newMeal]);
@@ -40,6 +41,11 @@ function App() {
   return (
     <main className="max-w-[1650px] px-6 ">
       <Logo />
+
+      <div>
+        <h3>Calories Remaining: {caloriesRemaining}</h3>
+      </div>
+
       <AddPostMeal addNewMeal={addNewMeal} />
       <Meals meals={meals} removeMeal={removeMeal} />
     </main>
