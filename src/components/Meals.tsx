@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { MealType } from "../types";
 import DateWidget from "./DateWidget";
 
@@ -7,6 +8,11 @@ interface MealsProps {
 }
 
 const Meals = ({ meals, removeMeal }: MealsProps) => {
+  const [caloriesRemaining] = useState(2000);
+  const totalMealCalories = meals.reduce((meal, current) => {
+    return (meal += current.quantity * Number(current.calories));
+  }, 0);
+
   const mealElements = meals.map((meal) => (
     <li key={meal.id}>
       <span className="font-semibold">Food:</span> {meal.food}{" "}
@@ -27,6 +33,12 @@ const Meals = ({ meals, removeMeal }: MealsProps) => {
       <h3 className="font-bold text-2xl mb-2">Today's Meals</h3>
       <DateWidget />
       <ul className="space-y-3 mt-14">{mealElements}</ul>
+
+      <div>
+        <h3 className="mt-10 text-3xl">
+          Calories Remaining: {caloriesRemaining - totalMealCalories}
+        </h3>
+      </div>
     </section>
   );
 };

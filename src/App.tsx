@@ -25,7 +25,6 @@ function App() {
       calories: "50",
     },
   ]);
-  const [caloriesRemaining, setCaloriesRemaining] = useState(2000);
 
   const addNewMeal = (newMeal: MealType) => {
     setMeals([...meals, newMeal]);
@@ -38,21 +37,9 @@ function App() {
     setMeals(filteredMeals);
   };
 
-  // console.log(meals);
-
-  // const totalCalorieIntake = meals.reduce((meal, current) => {
-  //   return (meal += Number(current.calories));
-  // }, 0);
-
-  // console.log(totalCalorieIntake);
-
   return (
     <main className="max-w-[1650px] px-6 ">
       <Logo />
-
-      <div>
-        <h3>Calories Remaining: {caloriesRemaining}</h3>
-      </div>
 
       <AddPostMeal addNewMeal={addNewMeal} />
       <Meals meals={meals} removeMeal={removeMeal} />
