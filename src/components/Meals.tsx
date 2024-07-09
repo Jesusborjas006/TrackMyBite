@@ -32,8 +32,12 @@ const Meals = ({
   let content;
   if (caloriesRemaining === 0) {
     content = <p>Goal has been met!</p>;
-  } else {
+  } else if (caloriesRemaining > 0) {
     content = <p>Calories Remaining: {caloriesRemaining}</p>;
+  } else {
+    content = (
+      <p>You're {Math.abs(2000 - totalMealCalories)} calories over the goal!</p>
+    );
   }
 
   return (
@@ -44,7 +48,7 @@ const Meals = ({
 
       <div>
         <h3 className="mt-10 text-3xl">{content}</h3>
-        <p>Goal: {caloriesRemaining} calories</p>
+        <p>Goal: {2000} calories</p>
         <p>Food: {totalMealCalories} calories</p>
       </div>
     </section>
