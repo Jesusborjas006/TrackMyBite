@@ -13,22 +13,29 @@ interface ProfileProps {
 const Profile = ({ userInfo }: ProfileProps) => {
   const { age, weight, height, activityLevel } = userInfo;
   return (
-    <section className="border ">
-      <h3>
+    <section className="flex justify-center relative">
+      <h3 className="absolute text-xl top-10">
         <span className="capitalize">{userInfo.user}'s</span> profile
       </h3>
-      <div className="w-[100px] h-[100px] bg-black rounded-full flex items-center justify-center">
-        <p className="text-red-500 capitalize text-5xl">
-          {userInfo.user.split("")[0]}
-        </p>
+      <div className="bg-white p-10 min-w-[300px] mt-32 flex flex-col items-center shadow-md rounded-xl">
+        <div className="w-[100px] h-[100px] bg-black rounded-full flex items-center justify-center mb-8">
+          <p className="text-red-500 capitalize text-5xl">
+            {userInfo.user.split("")[0]}
+          </p>
+        </div>
+        <ul className="space-y-1">
+          <li>Age: {age}</li>
+          <li>Weight: {weight} lbs</li>
+          <li>Height: {height} ft</li>
+          <li>Activity Level: {activityLevel}</li>
+        </ul>
+        <Link
+          className="bg-green-400 py-2 px-3 rounded-sm inline-block mt-4"
+          to="/edit/user"
+        >
+          Edit Profile
+        </Link>
       </div>
-      <ul>
-        <li>Age: {age}</li>
-        <li>Weight: {weight} </li>
-        <li>Height: {height}</li>
-        <li>Activity Level: {activityLevel}</li>
-      </ul>
-      <Link to="/edit/user">Edit Profile</Link>
     </section>
   );
 };
