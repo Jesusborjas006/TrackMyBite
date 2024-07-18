@@ -25,7 +25,15 @@ const Login = () => {
           value={user}
           onChange={(e) => setUser(e.target.value)}
         />
-        <button className="border ml-2 px-2 border-black" onClick={handleLogIn}>
+        <button
+          className={`border ml-2 px-2 border-black ${
+            user
+              ? "cursor-pointer bg-black text-white hover:bg-green-900 active:bg-green-300"
+              : "bg-[#ccc] text-[#666] cursor-not-allowed"
+          }`}
+          onClick={handleLogIn}
+          disabled={!user}
+        >
           Log In
         </button>
       </form>
