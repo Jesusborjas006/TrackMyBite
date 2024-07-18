@@ -5,6 +5,7 @@ import Meals from "./components/Meals";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
+import Profile from "./pages/Profile";
 
 function App() {
   const [user, setUser] = useState("");
@@ -52,6 +53,7 @@ function App() {
             </>
           }
         />
+        <Route path="/profile/:user" element={<Profile user={user} />} />
       </Routes>
     </main>
   );

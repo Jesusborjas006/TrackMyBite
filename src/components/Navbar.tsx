@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
 
 interface NavbarProps {
@@ -21,6 +21,7 @@ const Navbar = ({ user, setUser }: NavbarProps) => {
         <p>
           Welcome, <span className="capitalize text-green-500">{user}</span>
         </p>
+        <Link to={`/profile/${user}`}>Profile</Link>
         <button className="text-green-500" onClick={logUserOut}>
           Logout
         </button>
