@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 interface ProfileProps {
-  user: string;
   userInfo: {
     user: string;
     age: string;
@@ -11,11 +10,11 @@ interface ProfileProps {
   };
 }
 
-const Profile = ({ user, userInfo }: ProfileProps) => {
+const Profile = ({ userInfo }: ProfileProps) => {
   const { age, weight, height, activityLevel } = userInfo;
   return (
     <section>
-      <h3>{user} profile</h3>
+      <h3>{userInfo.user} profile</h3>
       <ul>
         <li>Age: {age}</li>
         <li>Weight: {weight} </li>

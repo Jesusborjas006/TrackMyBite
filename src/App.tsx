@@ -9,9 +9,8 @@ import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 
 function App() {
-  const [user, setUser] = useState("");
   const [userInfo, setUserInfo] = useState({
-    user: user,
+    user: "",
     age: "",
     weight: "",
     height: "",
@@ -44,12 +43,15 @@ function App() {
   return (
     <main>
       <Routes>
-        <Route path="/" element={<Login user={user} setUser={setUser} />} />
+        <Route
+          path="/"
+          element={<Login userInfo={userInfo} setUserInfo={setUserInfo} />}
+        />
         <Route
           path="/home"
           element={
             <>
-              <Navbar user={user} setUser={setUser} />
+              <Navbar userInfo={userInfo} setUserInfo={setUserInfo} />
               <section className="max-w-[1650px] px-6 ">
                 <AddPostMeal addNewMeal={addNewMeal} />
                 <Meals
@@ -64,16 +66,12 @@ function App() {
         />
         <Route
           path="/profile/:user"
-          element={<Profile user={user} userInfo={userInfo} />}
+          element={<Profile userInfo={userInfo} />}
         />
         <Route
           path="/edit/user"
           element={
-            <EditProfile
-              userInfo={userInfo}
-              setUserInfo={setUserInfo}
-              user={user}
-            />
+            <EditProfile userInfo={userInfo} setUserInfo={setUserInfo} />
           }
         />
       </Routes>

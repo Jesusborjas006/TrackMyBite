@@ -1,17 +1,31 @@
 import { useNavigate } from "react-router-dom";
 
 interface LoginProps {
-  user: string;
-  setUser: React.Dispatch<React.SetStateAction<string>>;
+  userInfo: {
+    user: string;
+    age: string;
+    weight: string;
+    height: string;
+    activityLevel: string;
+  };
+  setUserInfo: React.Dispatch<
+    React.SetStateAction<{
+      user: string;
+      age: string;
+      weight: string;
+      height: string;
+      activityLevel: string;
+    }>
+  >;
 }
 
-const Login = ({ user, setUser }: LoginProps) => {
+const Login = ({ userInfo, setUserInfo }: LoginProps) => {
   const navigate = useNavigate();
 
   const handleLogIn = (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
-    if (user) {
+    if (userInfo.user) {
       navigate("/home");
     }
   };
@@ -24,17 +38,19 @@ const Login = ({ user, setUser }: LoginProps) => {
         <input
           className="border border-black "
           type="text"
-          value={user}
-          onChange={(e) => setUser(e.target.value)}
+          value={userInfo.user}
+          onChange={(e) => {
+            setUserInfo({ ...userInfo, user: e.target.value });
+          }}
         />
         <button
           className={`border ml-2 px-2 border-black ${
-            user
+            userInfo.user
               ? "cursor-pointer bg-black text-white hover:bg-green-900 active:bg-green-300"
               : "bg-[#ccc] text-[#666] cursor-not-allowed"
           }`}
           onClick={handleLogIn}
-          disabled={!user}
+          disabled={!userInfo.user}
         >
           Log In
         </button>

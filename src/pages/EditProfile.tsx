@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface EditProfileProps {
   userInfo: {
@@ -17,10 +17,9 @@ interface EditProfileProps {
       activityLevel: string;
     }>
   >;
-  user: string;
 }
 
-const EditProfile = ({ userInfo, setUserInfo, user }: EditProfileProps) => {
+const EditProfile = ({ userInfo, setUserInfo }: EditProfileProps) => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -29,7 +28,7 @@ const EditProfile = ({ userInfo, setUserInfo, user }: EditProfileProps) => {
 
   const saveUserChanges = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    navigate(`/profile/${user}`);
+    navigate(`/profile/${userInfo.user}`);
   };
 
   return (
