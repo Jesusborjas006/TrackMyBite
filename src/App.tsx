@@ -6,9 +6,17 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   const [user, setUser] = useState("");
+  const [userInfo, setUserInfo] = useState({
+    user: user,
+    age: "",
+    weight: "",
+    height: "",
+    activityLevel: "",
+  });
   const [meals, setMeals] = useState<MealType[]>([]);
   const [caloriesRemaining, setCaloriesRemaining] = useState(2000);
   const [totalMealCalories, setTotalMealCalories] = useState(0);
@@ -53,7 +61,16 @@ function App() {
             </>
           }
         />
-        <Route path="/profile/:user" element={<Profile user={user} />} />
+        <Route
+          path="/profile/:user"
+          element={<Profile user={user} userInfo={userInfo} />}
+        />
+        <Route
+          path="/edit/user"
+          element={
+            <EditProfile userInfo={userInfo} setUserInfo={setUserInfo} />
+          }
+        />
       </Routes>
     </main>
   );
