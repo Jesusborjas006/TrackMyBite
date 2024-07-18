@@ -39,7 +39,7 @@ function App() {
           path="/home"
           element={
             <>
-              <Navbar user={user} />
+              <Navbar user={user} setUser={setUser} />
               <section className="max-w-[1650px] px-6 ">
                 <AddPostMeal addNewMeal={addNewMeal} />
                 <Meals
