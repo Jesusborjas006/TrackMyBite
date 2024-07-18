@@ -30,7 +30,7 @@ const Profile = ({ userInfo }: ProfileProps) => {
           <li>Activity Level: {activityLevel}</li>
         </ul>
         <Link
-          className="bg-green-400 py-2 px-3 rounded-sm inline-block mt-4"
+          className="bg-green-400 hover:bg-green-500 py-2 px-3 rounded-sm inline-block mt-4"
           to="/edit/user"
         >
           Edit Profile
