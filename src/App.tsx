@@ -32,7 +32,7 @@ function App() {
   };
 
   return (
-    <main className="max-w-[1650px] px-6 ">
+    <main>
       <Routes>
         <Route path="/" element={<Login user={user} setUser={setUser} />} />
         <Route
@@ -40,13 +40,15 @@ function App() {
           element={
             <>
               <Navbar user={user} />
-              <AddPostMeal addNewMeal={addNewMeal} />
-              <Meals
-                meals={meals}
-                removeMeal={removeMeal}
-                caloriesRemaining={caloriesRemaining}
-                totalMealCalories={totalMealCalories}
-              />
+              <section className="max-w-[1650px] px-6 ">
+                <AddPostMeal addNewMeal={addNewMeal} />
+                <Meals
+                  meals={meals}
+                  removeMeal={removeMeal}
+                  caloriesRemaining={caloriesRemaining}
+                  totalMealCalories={totalMealCalories}
+                />
+              </section>
             </>
           }
         />

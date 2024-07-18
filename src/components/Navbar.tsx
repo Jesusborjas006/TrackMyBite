@@ -6,10 +6,10 @@ interface NavbarProps {
 
 const Navbar = ({ user }: NavbarProps) => {
   return (
-    <nav>
+    <nav className="border flex justify-around items-center bg-white py-3">
       <Logo />
-      <p>
-        Welcome, <span className="capitalize">{user}</span>
+      <p className="text-lg font-semibold">
+        Welcome, <span className="capitalize text-green-500">{user}</span>
       </p>
     </nav>
   );
