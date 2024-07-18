@@ -22,7 +22,7 @@ interface EditProfileProps {
 const EditProfile = ({ userInfo, setUserInfo }: EditProfileProps) => {
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
 

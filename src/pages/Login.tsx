@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Logo from "../components/Logo";
 
 interface LoginProps {
   userInfo: {
@@ -32,7 +33,8 @@ const Login = ({ userInfo, setUserInfo }: LoginProps) => {
 
   return (
     <section className="text-center flex flex-col justify-center items-center border h-screen">
-      <h2 className="text-4xl font-bold mb-4">What's your name?</h2>
+      <Logo size={5} />
+      <h2 className="text-3xl font-bold pt-10 mb-4">What's your name?</h2>
       <form>
         <label>Name: </label>
         <input

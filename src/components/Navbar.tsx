@@ -34,19 +34,31 @@ const Navbar = ({ userInfo, setUserInfo }: NavbarProps) => {
     navigate("/");
   };
 
+  let navbarContent;
+
+  if (userInfo.user) {
+    navbarContent = (
+      <>
+        <Logo size={3} />
+        <div className="flex gap-x-6 text-lg font-semibold">
+          <p>
+            Welcome,{" "}
+            <span className="capitalize text-green-500">{userInfo.user}</span>
+          </p>
+          <Link to={`/profile/${userInfo.user}`}>Profile</Link>
+          <button className="text-green-500" onClick={logUserOut}>
+            Logout
+          </button>
+        </div>
+      </>
+    );
+  } else {
+    navbarContent = <Logo size={3} />;
+  }
+
   return (
     <nav className="border flex justify-around items-center bg-white py-3">
-      <Logo />
-      <div className="flex gap-x-6 text-lg font-semibold">
-        <p>
-          Welcome,{" "}
-          <span className="capitalize text-green-500">{userInfo.user}</span>
-        </p>
-        <Link to={`/profile/${userInfo.user}`}>Profile</Link>
-        <button className="text-green-500" onClick={logUserOut}>
-          Logout
-        </button>
-      </div>
+      {navbarContent}
     </nav>
   );
 };
