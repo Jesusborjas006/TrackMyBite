@@ -17,6 +17,7 @@ function App() {
     height: "",
     activityLevel: "",
   });
+  console.log(userInfo);
   const [meals, setMeals] = useState<MealType[]>([]);
   const [caloriesRemaining, setCaloriesRemaining] = useState(2000);
   const [totalMealCalories, setTotalMealCalories] = useState(0);
@@ -68,7 +69,11 @@ function App() {
         <Route
           path="/edit/user"
           element={
-            <EditProfile userInfo={userInfo} setUserInfo={setUserInfo} />
+            <EditProfile
+              userInfo={userInfo}
+              setUserInfo={setUserInfo}
+              user={user}
+            />
           }
         />
       </Routes>

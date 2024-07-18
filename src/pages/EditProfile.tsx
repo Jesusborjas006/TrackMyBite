@@ -1,3 +1,5 @@
+import { useLocation, useNavigate } from "react-router-dom";
+
 interface EditProfileProps {
   userInfo: {
     user: string;
@@ -15,11 +17,19 @@ interface EditProfileProps {
       activityLevel: string;
     }>
   >;
+  user: string;
 }
 
-const EditProfile = ({ userInfo, setUserInfo }: EditProfileProps) => {
+const EditProfile = ({ userInfo, setUserInfo, user }: EditProfileProps) => {
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
+
+  const saveUserChanges = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    navigate(`/profile/${user}`);
   };
 
   return (
@@ -63,6 +73,7 @@ const EditProfile = ({ userInfo, setUserInfo }: EditProfileProps) => {
           onChange={handleChange}
         />
       </div>
+      <button onClick={saveUserChanges}>Save Changes</button>
     </form>
   );
 };
