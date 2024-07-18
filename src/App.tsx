@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { MealType } from "./types";
 import AddPostMeal from "./components/AddPostMeal";
-import Logo from "./components/Logo";
 import Meals from "./components/Meals";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
+import Navbar from "./components/Navbar";
 
 function App() {
+  const [user, setUser] = useState("");
   const [meals, setMeals] = useState<MealType[]>([]);
   const [caloriesRemaining, setCaloriesRemaining] = useState(2000);
   const [totalMealCalories, setTotalMealCalories] = useState(0);
@@ -33,12 +34,12 @@ function App() {
   return (
     <main className="max-w-[1650px] px-6 ">
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Login user={user} setUser={setUser} />} />
         <Route
           path="/home"
           element={
             <>
-              <Logo />
+              <Navbar user={user} />
               <AddPostMeal addNewMeal={addNewMeal} />
               <Meals
                 meals={meals}

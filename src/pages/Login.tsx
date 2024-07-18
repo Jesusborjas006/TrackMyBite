@@ -1,9 +1,11 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const [user, setUser] = useState("");
+interface LoginProps {
+  user: string;
+  setUser: React.Dispatch<React.SetStateAction<string>>;
+}
 
+const Login = ({ user, setUser }: LoginProps) => {
   const navigate = useNavigate();
 
   const handleLogIn = (e: { preventDefault: () => void }) => {
