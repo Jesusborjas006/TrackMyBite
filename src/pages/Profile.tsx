@@ -13,8 +13,15 @@ interface ProfileProps {
 const Profile = ({ userInfo }: ProfileProps) => {
   const { age, weight, height, activityLevel } = userInfo;
   return (
-    <section>
-      <h3>{userInfo.user} profile</h3>
+    <section className="border ">
+      <h3>
+        <span className="capitalize">{userInfo.user}'s</span> profile
+      </h3>
+      <div className="w-[100px] h-[100px] bg-black rounded-full flex items-center justify-center">
+        <p className="text-red-500 capitalize text-5xl">
+          {userInfo.user.split("")[0]}
+        </p>
+      </div>
       <ul>
         <li>Age: {age}</li>
         <li>Weight: {weight} </li>

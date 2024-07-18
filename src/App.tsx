@@ -75,7 +75,10 @@ function App() {
         <Route
           path="/edit/user"
           element={
-            <EditProfile userInfo={userInfo} setUserInfo={setUserInfo} />
+            <>
+              <Navbar userInfo={userInfo} setUserInfo={setUserInfo} />
+              <EditProfile userInfo={userInfo} setUserInfo={setUserInfo} />
+            </>
           }
         />
       </Routes>
