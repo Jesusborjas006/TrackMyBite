@@ -4,6 +4,7 @@ import Logo from "./Logo";
 interface NavbarProps {
   userInfo: {
     user: string;
+    calorieGoal: string;
     age: string;
     weight: string;
     height: string;
@@ -12,6 +13,7 @@ interface NavbarProps {
   setUserInfo: React.Dispatch<
     React.SetStateAction<{
       user: string;
+      calorieGoal: string;
       age: string;
       weight: string;
       height: string;
@@ -26,6 +28,7 @@ const Navbar = ({ userInfo, setUserInfo }: NavbarProps) => {
   const logUserOut = () => {
     setUserInfo({
       user: "",
+      calorieGoal: "",
       age: "",
       weight: "",
       height: "",

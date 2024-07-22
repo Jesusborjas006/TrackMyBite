@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 interface EditProfileProps {
   userInfo: {
     user: string;
+    calorieGoal: string;
     age: string;
     weight: string;
     height: string;
@@ -11,6 +12,7 @@ interface EditProfileProps {
   setUserInfo: React.Dispatch<
     React.SetStateAction<{
       user: string;
+      calorieGoal: string;
       age: string;
       weight: string;
       height: string;
