@@ -4,17 +4,17 @@ import DateWidget from "./DateWidget";
 interface MealsProps {
   meals: [] | MealType[];
   removeMeal: (id: number) => void;
-  caloriesRemaining: number;
-  totalMealCalories: number;
+  totalMealCalories: string;
   calorieGoal: string;
+  remainingCalories: string;
 }
 
 const Meals = ({
   meals,
   removeMeal,
-  caloriesRemaining,
   totalMealCalories,
   calorieGoal,
+  remainingCalories,
 }: MealsProps) => {
   const mealElements = meals.map((meal) => (
     <li key={meal.id}>
@@ -32,14 +32,14 @@ const Meals = ({
   ));
 
   let content;
-  if (+calorieGoal === 0) {
+  if (+remainingCalories === 0) {
     content = <p>Goal has been met!</p>;
-  } else if (+calorieGoal > 0) {
-    content = <p>Calories Remaining: {calorieGoal}</p>;
+  } else if (+remainingCalories > 0) {
+    content = <p>Calories Remaining: {remainingCalories}</p>;
   } else {
     content = (
       <p>
-        You're {Math.abs(+calorieGoal - totalMealCalories)} calories over the
+        You're {Math.abs(+calorieGoal - +totalMealCalories)} calories over the
         goal!
       </p>
     );
