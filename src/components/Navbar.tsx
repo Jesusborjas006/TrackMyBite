@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
 
 interface NavbarProps {
@@ -45,10 +45,19 @@ const Navbar = ({ userInfo, setUserInfo }: NavbarProps) => {
             Welcome,{" "}
             <span className="capitalize text-green-500">{userInfo.user}</span>
           </p>
-          <Link to={`/profile/${userInfo.user}`}>Profile</Link>
-          <button className="text-green-500" onClick={logUserOut}>
-            Logout
-          </button>
+          <NavLink
+            to="/home"
+            className={({ isActive }) => (isActive ? "text-green-500" : "")}
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to={`/profile/${userInfo.user}`}
+            className={({ isActive }) => (isActive ? "text-green-500" : "")}
+          >
+            Profile
+          </NavLink>
+          <button onClick={logUserOut}>Logout</button>
         </div>
       </>
     );
