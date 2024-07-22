@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { MealType } from "../types";
 import DateWidget from "./DateWidget";
 
@@ -55,6 +56,12 @@ const Meals = ({
         <h3 className="mt-10 text-3xl">{content}</h3>
         <p>Goal: {calorieGoal} calories</p>
         <p>Food: {totalMealCalories} calories</p>
+        <Link
+          className="border p-1 bg-black text-white hover:bg-green-900 active:bg-green-300 inline-block mt-4"
+          to={"/edit/user"}
+        >
+          Change Calorie Goal
+        </Link>
       </div>
     </section>
   );
