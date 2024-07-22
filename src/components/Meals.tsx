@@ -6,6 +6,7 @@ interface MealsProps {
   removeMeal: (id: number) => void;
   caloriesRemaining: number;
   totalMealCalories: number;
+  calorieGoal: string;
 }
 
 const Meals = ({
@@ -13,6 +14,7 @@ const Meals = ({
   removeMeal,
   caloriesRemaining,
   totalMealCalories,
+  calorieGoal,
 }: MealsProps) => {
   const mealElements = meals.map((meal) => (
     <li key={meal.id}>
@@ -30,13 +32,16 @@ const Meals = ({
   ));
 
   let content;
-  if (caloriesRemaining === 0) {
+  if (+calorieGoal === 0) {
     content = <p>Goal has been met!</p>;
-  } else if (caloriesRemaining > 0) {
-    content = <p>Calories Remaining: {caloriesRemaining}</p>;
+  } else if (+calorieGoal > 0) {
+    content = <p>Calories Remaining: {calorieGoal}</p>;
   } else {
     content = (
-      <p>You're {Math.abs(2000 - totalMealCalories)} calories over the goal!</p>
+      <p>
+        You're {Math.abs(+calorieGoal - totalMealCalories)} calories over the
+        goal!
+      </p>
     );
   }
 
@@ -48,7 +53,7 @@ const Meals = ({
 
       <div>
         <h3 className="mt-10 text-3xl">{content}</h3>
-        <p>Goal: {2000} calories</p>
+        <p>Goal: {calorieGoal} calories</p>
         <p>Food: {totalMealCalories} calories</p>
       </div>
     </section>

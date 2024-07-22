@@ -19,16 +19,26 @@ function App() {
   });
   const [meals, setMeals] = useState<MealType[]>([]);
   const [caloriesRemaining, setCaloriesRemaining] = useState(2000);
-  const [totalMealCalories, setTotalMealCalories] = useState(0);
+  const [totalMealCalories, setTotalMealCalories] = useState("");
 
   console.log(userInfo);
 
   useEffect(() => {
     const totalCalorieIntake = meals.reduce((acc, currentMeal) => {
-      return (acc += currentMeal.quantity * Number(currentMeal.calories));
+      return (acc += currentMeal.quantity * currentMeal.calories);
     }, 0);
-    setTotalMealCalories(totalCalorieIntake);
-    setCaloriesRemaining(2000 - totalCalorieIntake);
+    setTotalMealCalories(String(totalCalorieIntake));
+
+    console.log(typeof String(totalCalorieIntake));
+
+    if (!totalCalorieIntake) {
+      return;
+    } else {
+      setUserInfo({
+        ...userInfo,
+        calorieGoal: String(userInfo.calorieGoal - totalCalorieIntake),
+      });
+    }
   }, [meals]);
 
   const addNewMeal = (newMeal: MealType) => {
@@ -61,6 +71,7 @@ function App() {
                   removeMeal={removeMeal}
                   caloriesRemaining={caloriesRemaining}
                   totalMealCalories={totalMealCalories}
+                  calorieGoal={userInfo.calorieGoal}
                 />
               </section>
             </>
