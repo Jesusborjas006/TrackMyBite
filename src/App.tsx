@@ -11,6 +11,7 @@ import EditProfile from "./pages/EditProfile";
 function App() {
   const [userInfo, setUserInfo] = useState({
     user: "",
+    calorieGoal: "",
     age: "",
     weight: "",
     height: "",
@@ -19,6 +20,8 @@ function App() {
   const [meals, setMeals] = useState<MealType[]>([]);
   const [caloriesRemaining, setCaloriesRemaining] = useState(2000);
   const [totalMealCalories, setTotalMealCalories] = useState(0);
+
+  console.log(userInfo);
 
   useEffect(() => {
     const totalCalorieIntake = meals.reduce((acc, currentMeal) => {
