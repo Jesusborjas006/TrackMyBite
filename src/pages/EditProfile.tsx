@@ -30,7 +30,7 @@ const EditProfile = ({ userInfo, setUserInfo }: EditProfileProps) => {
 
   const saveUserChanges = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    navigate(`/profile/${userInfo.user}`);
+    navigate(-1);
   };
 
   return (
@@ -40,6 +40,16 @@ const EditProfile = ({ userInfo, setUserInfo }: EditProfileProps) => {
           Edit Your Profile
         </h3>
         <form className="min-w-[320px] max-w-[500px] mx-auto border flex flex-col p-6 gap-y-6 bg-white shadow-md rounded-xl">
+          <div className="flex gap-x-2 border">
+            <label>Calorie Goal:</label>
+            <input
+              className="w-full border bg-slate-100 text-indent pl-1"
+              type="text"
+              name="calorieGoal"
+              value={userInfo.calorieGoal}
+              onChange={handleChange}
+            />
+          </div>
           <div className="flex gap-x-2">
             <label>Age:</label>
             <input
