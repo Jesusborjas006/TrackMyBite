@@ -28,6 +28,10 @@ function App() {
   const [isDisplayed, setIsDisplayed] = useState(true);
   const [breakfastInput, setBreakfastInput] = useState("");
   const [mealType, setMealType] = useState("");
+  const [mealInfo, setMealInfo] = useState({
+    food: "",
+    calories: "",
+  });
 
   console.log(detailedMeals);
   console.log("meal type: ", mealType);
@@ -58,22 +62,29 @@ function App() {
     setMeals(filteredMeals);
   };
 
-  const handleFormDisplay = () => {
-    setIsDisplayed((prev) => !prev);
+  // const handleFormDisplay = () => {
+  //   setIsDisplayed((prev) => !prev);
+  // };
+
+  const handleChange = (e) => {
+    setMealInfo({ ...mealInfo, [e.target.name]: e.target.value });
   };
 
   const submitNewFood = (e) => {
     e.preventDefault();
 
-    const newMeal = {
-      id: Date.now(),
-      food: breakfastInput,
-    };
+    if (mealInfo.food && mealInfo.calories) {
+      const newMeal = {
+        id: Date.now(),
+        food: mealInfo.food,
+        calories: mealInfo.calories,
+      };
 
-    setDetailedMeals({
-      ...detailedMeals,
-      [mealType]: [...detailedMeals[mealType], newMeal],
-    });
+      setDetailedMeals({
+        ...detailedMeals,
+        [mealType]: [...detailedMeals[mealType], newMeal],
+      });
+    }
   };
 
   const getMealTypeClicked = (type) => {
@@ -93,7 +104,7 @@ function App() {
             <>
               <Navbar userInfo={userInfo} setUserInfo={setUserInfo} />
               <section className="max-w-[1650px] px-6 ">
-                <AddPostMeal addNewMeal={addNewMeal} />
+                {/* <AddPostMeal addNewMeal={addNewMeal} /> */}
                 <div className="shadow-md rounded-xl bg-white w-[300px] mx-auto mt-10">
                   <ul className="py-4 px-6 space-y-4">
                     <li className="text-lg font-semibold flex items-center justify-between">
@@ -133,9 +144,21 @@ function App() {
                   <input
                     type="text"
                     placeholder="food"
-                    value={breakfastInput}
-                    onChange={(e) => setBreakfastInput(e.target.value)}
+                    name="food"
+                    value={mealInfo.food}
+                    onChange={handleChange}
                   />
+                  <label htmlFor="calories">
+                    Calories Per Item:
+                    <input
+                      className="border border-black ml-1 w-[100px]"
+                      id="calories"
+                      type="number"
+                      name="calories"
+                      value={mealInfo.calories}
+                      onChange={handleChange}
+                    />
+                  </label>
                   <button onClick={submitNewFood}>Add food</button>
                 </form>
                 <Meals
