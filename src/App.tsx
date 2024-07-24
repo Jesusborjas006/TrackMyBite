@@ -30,6 +30,7 @@ function App() {
   const [mealType, setMealType] = useState("");
   const [mealInfo, setMealInfo] = useState({
     food: "",
+    quantity: 1,
     calories: "",
   });
 
@@ -77,6 +78,7 @@ function App() {
       const newMeal = {
         id: Date.now(),
         food: mealInfo.food,
+        quantity: mealInfo.quantity,
         calories: mealInfo.calories,
       };
 
@@ -84,6 +86,7 @@ function App() {
         ...detailedMeals,
         [mealType]: [...detailedMeals[mealType], newMeal],
       });
+      setMealInfo({ food: "", quantity: 1, calories: "" });
     }
   };
 
@@ -148,6 +151,20 @@ function App() {
                     value={mealInfo.food}
                     onChange={handleChange}
                   />
+                  <label htmlFor="quantity">
+                    Quantity:
+                    <select
+                      className="border border-black ml-1"
+                      id="qauntity"
+                      name="quantity"
+                      value={mealInfo.quantity}
+                      onChange={handleChange}
+                    >
+                      <option value={1}>1</option>
+                      <option value={2}>2</option>
+                      <option value={3}>3</option>
+                    </select>
+                  </label>
                   <label htmlFor="calories">
                     Calories Per Item:
                     <input
