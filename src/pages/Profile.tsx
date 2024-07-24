@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 interface ProfileProps {
   userInfo: {
     user: string;
+    calorieGoal: string;
     age: string;
     weight: string;
     height: string;
@@ -11,7 +12,7 @@ interface ProfileProps {
 }
 
 const Profile = ({ userInfo }: ProfileProps) => {
-  const { age, weight, height, activityLevel } = userInfo;
+  const { age, calorieGoal, weight, height, activityLevel } = userInfo;
   return (
     <section className="flex justify-center relative">
       <h3 className="absolute text-xl top-10">
@@ -24,6 +25,7 @@ const Profile = ({ userInfo }: ProfileProps) => {
           </p>
         </div>
         <ul className="space-y-1">
+          <li>Calorie Goal: {calorieGoal}</li>
           <li>Age: {age}</li>
           <li>Weight: {weight} lbs</li>
           <li>Height: {height} ft</li>

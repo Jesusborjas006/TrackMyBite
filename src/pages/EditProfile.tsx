@@ -39,8 +39,8 @@ const EditProfile = ({ userInfo, setUserInfo }: EditProfileProps) => {
         <h3 className="text-xl font-semibold text-green-600 mb-2">
           Edit Your Profile
         </h3>
-        <form className="min-w-[320px] max-w-[500px] mx-auto border flex flex-col p-6 gap-y-6 bg-white shadow-md rounded-xl">
-          <div className="flex gap-x-2 border">
+        <form className="min-w-[320px] max-w-[500px] mx-auto border flex flex-col p-6 gap-y-4 bg-white shadow-md rounded-xl">
+          <div>
             <label>Calorie Goal:</label>
             <input
               className="w-full border bg-slate-100 text-indent pl-1"
@@ -50,7 +50,7 @@ const EditProfile = ({ userInfo, setUserInfo }: EditProfileProps) => {
               onChange={handleChange}
             />
           </div>
-          <div className="flex gap-x-2">
+          <div>
             <label>Age:</label>
             <input
               className="w-full border bg-slate-100 text-indent pl-1"
@@ -61,7 +61,7 @@ const EditProfile = ({ userInfo, setUserInfo }: EditProfileProps) => {
             />
           </div>
 
-          <div className="flex gap-x-2">
+          <div>
             <label>Weight: </label>
             <input
               className="w-full border bg-slate-100 pl-1"
@@ -73,7 +73,7 @@ const EditProfile = ({ userInfo, setUserInfo }: EditProfileProps) => {
             />
           </div>
 
-          <div className="flex gap-x-2">
+          <div>
             <label>Height: </label>
             <input
               className="w-full border bg-slate-100 pl-1"
@@ -85,7 +85,7 @@ const EditProfile = ({ userInfo, setUserInfo }: EditProfileProps) => {
             />
           </div>
 
-          <div className="flex gap-x-2 ">
+          <div>
             <label>Activity Level: </label>
             <input
               className="w-full border bg-slate-100 pl-1"
