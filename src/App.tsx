@@ -61,6 +61,31 @@ function App() {
               <Navbar userInfo={userInfo} setUserInfo={setUserInfo} />
               <section className="max-w-[1650px] px-6 ">
                 <AddPostMeal addNewMeal={addNewMeal} />
+                <div className="shadow-md rounded-xl bg-white w-[300px] mx-auto mt-10">
+                  <ul className="py-4 px-6 space-y-4">
+                    <li className="text-lg font-semibold flex items-center justify-between">
+                      Breakfast
+                      <button className="text-2xl font-bold bg-green-400 rounded-full w-[40px] h-[40px]">
+                        +
+                      </button>
+                    </li>
+                    <hr />
+                    <li className="text-lg font-semibold flex items-center justify-between">
+                      Lunch
+                      <button className="text-2xl font-bold bg-green-400 rounded-full w-[40px] h-[40px]">
+                        +
+                      </button>
+                    </li>
+                    <hr />
+                    <li className="text-xl font-semibold flex items-center justify-between">
+                      Dinner
+                      <button className="text-2xl font-bold bg-green-400 rounded-full w-[40px] h-[40px]">
+                        +
+                      </button>
+                    </li>
+                    <hr />
+                  </ul>
+                </div>
                 <Meals
                   meals={meals}
                   removeMeal={removeMeal}
