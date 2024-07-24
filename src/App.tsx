@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { MealType } from "./types";
-import AddPostMeal from "./components/AddPostMeal";
 import Meals from "./components/Meals";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
+import AddPostMealModal from "./components/AddPostMealModal";
 
 function App() {
   const [userInfo, setUserInfo] = useState({
@@ -28,11 +28,6 @@ function App() {
   const [isDisplayed, setIsDisplayed] = useState(true);
   const [breakfastInput, setBreakfastInput] = useState("");
   const [mealType, setMealType] = useState("");
-  const [mealInfo, setMealInfo] = useState({
-    food: "",
-    quantity: 1,
-    calories: "",
-  });
 
   console.log(detailedMeals);
   console.log("meal type: ", mealType);
@@ -53,7 +48,10 @@ function App() {
   }, [meals, userInfo.calorieGoal]);
 
   const addNewMeal = (newMeal: MealType) => {
-    setMeals((prevMeals) => [...prevMeals, newMeal]);
+    setDetailedMeals({
+      ...detailedMeals,
+      [mealType]: [...detailedMeals[mealType], newMeal],
+    });
   };
 
   const removeMeal = (id: number) => {
@@ -61,33 +59,6 @@ function App() {
       return meal.id !== id;
     });
     setMeals(filteredMeals);
-  };
-
-  // const handleFormDisplay = () => {
-  //   setIsDisplayed((prev) => !prev);
-  // };
-
-  const handleChange = (e) => {
-    setMealInfo({ ...mealInfo, [e.target.name]: e.target.value });
-  };
-
-  const submitNewFood = (e) => {
-    e.preventDefault();
-
-    if (mealInfo.food && mealInfo.calories) {
-      const newMeal = {
-        id: Date.now(),
-        food: mealInfo.food,
-        quantity: mealInfo.quantity,
-        calories: mealInfo.calories,
-      };
-
-      setDetailedMeals({
-        ...detailedMeals,
-        [mealType]: [...detailedMeals[mealType], newMeal],
-      });
-      setMealInfo({ food: "", quantity: 1, calories: "" });
-    }
   };
 
   const getMealTypeClicked = (type) => {
@@ -142,42 +113,7 @@ function App() {
                     <hr />
                   </ul>
                 </div>
-                <form className={isDisplayed ? "block" : "hidden"}>
-                  <label>Food: </label>
-                  <input
-                    type="text"
-                    placeholder="food"
-                    name="food"
-                    value={mealInfo.food}
-                    onChange={handleChange}
-                  />
-                  <label htmlFor="quantity">
-                    Quantity:
-                    <select
-                      className="border border-black ml-1"
-                      id="qauntity"
-                      name="quantity"
-                      value={mealInfo.quantity}
-                      onChange={handleChange}
-                    >
-                      <option value={1}>1</option>
-                      <option value={2}>2</option>
-                      <option value={3}>3</option>
-                    </select>
-                  </label>
-                  <label htmlFor="calories">
-                    Calories Per Item:
-                    <input
-                      className="border border-black ml-1 w-[100px]"
-                      id="calories"
-                      type="number"
-                      name="calories"
-                      value={mealInfo.calories}
-                      onChange={handleChange}
-                    />
-                  </label>
-                  <button onClick={submitNewFood}>Add food</button>
-                </form>
+                <AddPostMealModal addNewMeal={addNewMeal} />
                 <Meals
                   meals={meals}
                   removeMeal={removeMeal}

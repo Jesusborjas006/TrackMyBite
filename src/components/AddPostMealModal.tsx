@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { MealType } from "../types";
 
-interface AddPostMealProps {
+interface AddPostMealModalProps {
   addNewMeal: (newMeal: MealType) => void;
 }
 
-const AddPostMeal = ({ addNewMeal }: AddPostMealProps) => {
-  const [meal, setMeal] = useState({
+const AddPostMealModal = ({ addNewMeal }: AddPostMealModalProps) => {
+  const [mealInfo, setMealInfo] = useState({
     food: "",
     quantity: 1,
     calories: "",
@@ -15,44 +15,44 @@ const AddPostMeal = ({ addNewMeal }: AddPostMealProps) => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setMeal({ ...meal, [e.target.name]: e.target.value });
+    setMealInfo({ ...mealInfo, [e.target.name]: e.target.value });
   };
 
   const onSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    if (meal.food && meal.quantity && meal.calories) {
+
+    if (mealInfo.food && mealInfo.quantity && mealInfo.calories) {
       const newMeal = {
         id: Date.now(),
-        food: meal.food,
-        quantity: meal.quantity,
-        calories: meal.calories,
+        food: mealInfo.food,
+        quantity: mealInfo.quantity,
+        calories: mealInfo.calories,
       };
       addNewMeal(newMeal);
-      setMeal({ food: "", quantity: 1, calories: "" });
+      setMealInfo({ food: "", quantity: 1, calories: "" });
     }
   };
 
   return (
-    <form className="flex justify-center gap-x-4 mt-10">
-      <label htmlFor="food">
+    <form>
+      <label>
         Food:
         <input
-          className="border border-black ml-1"
-          id="food"
+          className="border border-black px-2"
           type="text"
+          placeholder="food"
           name="food"
-          value={meal.food}
+          value={mealInfo.food}
           onChange={handleChange}
         />
       </label>
-
       <label htmlFor="quantity">
         Quantity:
         <select
           className="border border-black ml-1"
           id="qauntity"
           name="quantity"
-          value={meal.quantity}
+          value={mealInfo.quantity}
           onChange={handleChange}
         >
           <option value={1}>1</option>
@@ -60,7 +60,6 @@ const AddPostMeal = ({ addNewMeal }: AddPostMealProps) => {
           <option value={3}>3</option>
         </select>
       </label>
-
       <label htmlFor="calories">
         Calories Per Item:
         <input
@@ -68,16 +67,15 @@ const AddPostMeal = ({ addNewMeal }: AddPostMealProps) => {
           id="calories"
           type="number"
           name="calories"
-          value={meal.calories}
+          value={mealInfo.calories}
           onChange={handleChange}
         />
       </label>
-
       <button className="border border-black px-2" onClick={onSubmit}>
-        Add Meal
+        Add food
       </button>
     </form>
   );
 };
 
-export default AddPostMeal;
+export default AddPostMealModal;
