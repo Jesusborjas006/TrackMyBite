@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import AddPostMealModal from "./components/AddPostMealModal";
+import MealEntryTable from "./components/MealEntryTable";
 
 function App() {
   const [userInfo, setUserInfo] = useState({
@@ -25,12 +26,8 @@ function App() {
     lunch: [],
     dinner: [],
   });
-  const [isDisplayed, setIsDisplayed] = useState(true);
-  const [breakfastInput, setBreakfastInput] = useState("");
+  const [isDisplayed, setIsDisplayed] = useState(false);
   const [mealType, setMealType] = useState("");
-
-  console.log(detailedMeals);
-  console.log("meal type: ", mealType);
 
   useEffect(() => {
     const totalCalorieIntake = meals.reduce((acc, currentMeal) => {
@@ -61,10 +58,6 @@ function App() {
     setMeals(filteredMeals);
   };
 
-  const getMealTypeClicked = (type) => {
-    setMealType(type);
-  };
-
   return (
     <main>
       <Routes>
@@ -78,42 +71,14 @@ function App() {
             <>
               <Navbar userInfo={userInfo} setUserInfo={setUserInfo} />
               <section className="max-w-[1650px] px-6 ">
-                {/* <AddPostMeal addNewMeal={addNewMeal} /> */}
-                <div className="shadow-md rounded-xl bg-white w-[300px] mx-auto mt-10">
-                  <ul className="py-4 px-6 space-y-4">
-                    <li className="text-lg font-semibold flex items-center justify-between">
-                      Breakfast
-                      <button
-                        className="text-2xl font-bold bg-green-400 rounded-full w-[40px] h-[40px]"
-                        onClick={() => getMealTypeClicked("breakfast")}
-                      >
-                        +
-                      </button>
-                    </li>
-                    <hr />
-                    <li className="text-lg font-semibold flex items-center justify-between">
-                      Lunch
-                      <button
-                        className="text-2xl font-bold bg-green-400 rounded-full w-[40px] h-[40px]"
-                        onClick={() => getMealTypeClicked("lunch")}
-                      >
-                        +
-                      </button>
-                    </li>
-                    <hr />
-                    <li className="text-xl font-semibold flex items-center justify-between">
-                      Dinner
-                      <button
-                        className="text-2xl font-bold bg-green-400 rounded-full w-[40px] h-[40px]"
-                        onClick={() => getMealTypeClicked("dinner")}
-                      >
-                        +
-                      </button>
-                    </li>
-                    <hr />
-                  </ul>
-                </div>
-                <AddPostMealModal addNewMeal={addNewMeal} />
+                <AddPostMealModal
+                  addNewMeal={addNewMeal}
+                  isDisplayed={isDisplayed}
+                />
+                <MealEntryTable
+                  setMealType={setMealType}
+                  setIsDisplayed={setIsDisplayed}
+                />
                 <Meals
                   meals={meals}
                   removeMeal={removeMeal}

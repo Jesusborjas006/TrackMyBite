@@ -3,9 +3,13 @@ import { MealType } from "../types";
 
 interface AddPostMealModalProps {
   addNewMeal: (newMeal: MealType) => void;
+  isDisplayed: boolean;
 }
 
-const AddPostMealModal = ({ addNewMeal }: AddPostMealModalProps) => {
+const AddPostMealModal = ({
+  addNewMeal,
+  isDisplayed,
+}: AddPostMealModalProps) => {
   const [mealInfo, setMealInfo] = useState({
     food: "",
     quantity: 1,
@@ -34,7 +38,7 @@ const AddPostMealModal = ({ addNewMeal }: AddPostMealModalProps) => {
   };
 
   return (
-    <form>
+    <form className={isDisplayed ? "block" : "hidden"}>
       <label>
         Food:
         <input
