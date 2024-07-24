@@ -1,18 +1,21 @@
+import { Link } from "react-router-dom";
 import { MealType } from "../types";
 import DateWidget from "./DateWidget";
 
 interface MealsProps {
   meals: [] | MealType[];
   removeMeal: (id: number) => void;
-  caloriesRemaining: number;
-  totalMealCalories: number;
+  totalMealCalories: string;
+  calorieGoal: string;
+  remainingCalories: string;
 }
 
 const Meals = ({
   meals,
   removeMeal,
-  caloriesRemaining,
   totalMealCalories,
+  calorieGoal,
+  remainingCalories,
 }: MealsProps) => {
   const mealElements = meals.map((meal) => (
     <li key={meal.id}>
@@ -30,13 +33,16 @@ const Meals = ({
   ));
 
   let content;
-  if (caloriesRemaining === 0) {
+  if (+remainingCalories === 0) {
     content = <p>Goal has been met!</p>;
-  } else if (caloriesRemaining > 0) {
-    content = <p>Calories Remaining: {caloriesRemaining}</p>;
+  } else if (+remainingCalories > 0) {
+    content = <p>Calories Remaining: {remainingCalories}</p>;
   } else {
     content = (
-      <p>You're {Math.abs(2000 - totalMealCalories)} calories over the goal!</p>
+      <p>
+        You're {Math.abs(+calorieGoal - +totalMealCalories)} calories over the
+        goal!
+      </p>
     );
   }
 
@@ -48,8 +54,14 @@ const Meals = ({
 
       <div>
         <h3 className="mt-10 text-3xl">{content}</h3>
-        <p>Goal: {2000} calories</p>
+        <p>Goal: {calorieGoal} calories</p>
         <p>Food: {totalMealCalories} calories</p>
+        <Link
+          className="border p-1 bg-black text-white hover:bg-green-900 active:bg-green-300 inline-block mt-4"
+          to={"/edit/user"}
+        >
+          Change Calorie Goal
+        </Link>
       </div>
     </section>
   );
