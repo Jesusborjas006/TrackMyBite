@@ -20,6 +20,17 @@ function App() {
   const [meals, setMeals] = useState<MealType[]>([]);
   const [remainingCalories, setRemainingCalories] = useState("");
   const [totalMealCalories, setTotalMealCalories] = useState("");
+  const [detailedMeals, setDetailedMeals] = useState({
+    breakfast: [],
+    lunch: [],
+    dinner: [],
+  });
+  const [isDisplayed, setIsDisplayed] = useState(true);
+  const [breakfastInput, setBreakfastInput] = useState("");
+  const [mealType, setMealType] = useState("");
+
+  console.log(detailedMeals);
+  console.log("meal type: ", mealType);
 
   useEffect(() => {
     const totalCalorieIntake = meals.reduce((acc, currentMeal) => {
@@ -47,6 +58,28 @@ function App() {
     setMeals(filteredMeals);
   };
 
+  const handleFormDisplay = () => {
+    setIsDisplayed((prev) => !prev);
+  };
+
+  const submitNewFood = (e) => {
+    e.preventDefault();
+
+    const newMeal = {
+      id: Date.now(),
+      food: breakfastInput,
+    };
+
+    setDetailedMeals({
+      ...detailedMeals,
+      [mealType]: [...detailedMeals[mealType], newMeal],
+    });
+  };
+
+  const getMealTypeClicked = (type) => {
+    setMealType(type);
+  };
+
   return (
     <main>
       <Routes>
@@ -65,27 +98,46 @@ function App() {
                   <ul className="py-4 px-6 space-y-4">
                     <li className="text-lg font-semibold flex items-center justify-between">
                       Breakfast
-                      <button className="text-2xl font-bold bg-green-400 rounded-full w-[40px] h-[40px]">
+                      <button
+                        className="text-2xl font-bold bg-green-400 rounded-full w-[40px] h-[40px]"
+                        onClick={() => getMealTypeClicked("breakfast")}
+                      >
                         +
                       </button>
                     </li>
                     <hr />
                     <li className="text-lg font-semibold flex items-center justify-between">
                       Lunch
-                      <button className="text-2xl font-bold bg-green-400 rounded-full w-[40px] h-[40px]">
+                      <button
+                        className="text-2xl font-bold bg-green-400 rounded-full w-[40px] h-[40px]"
+                        onClick={() => getMealTypeClicked("lunch")}
+                      >
                         +
                       </button>
                     </li>
                     <hr />
                     <li className="text-xl font-semibold flex items-center justify-between">
                       Dinner
-                      <button className="text-2xl font-bold bg-green-400 rounded-full w-[40px] h-[40px]">
+                      <button
+                        className="text-2xl font-bold bg-green-400 rounded-full w-[40px] h-[40px]"
+                        onClick={() => getMealTypeClicked("dinner")}
+                      >
                         +
                       </button>
                     </li>
                     <hr />
                   </ul>
                 </div>
+                <form className={isDisplayed ? "block" : "hidden"}>
+                  <label>Food: </label>
+                  <input
+                    type="text"
+                    placeholder="food"
+                    value={breakfastInput}
+                    onChange={(e) => setBreakfastInput(e.target.value)}
+                  />
+                  <button onClick={submitNewFood}>Add food</button>
+                </form>
                 <Meals
                   meals={meals}
                   removeMeal={removeMeal}
