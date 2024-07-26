@@ -1,11 +1,11 @@
 interface MealEntryTableProps {
   setMealType: React.Dispatch<React.SetStateAction<string>>;
-  setIsDisplayed: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsModalDisplayed: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const MealEntryTable = ({
   setMealType,
-  setIsDisplayed,
+  setIsModalDisplayed,
 }: MealEntryTableProps) => {
   return (
     <div className="shadow-md rounded-xl bg-white w-[300px] mx-auto mt-10">
@@ -15,7 +15,7 @@ const MealEntryTable = ({
           <button
             className="text-2xl font-bold bg-green-400 rounded-full w-[40px] h-[40px]"
             onClick={() => (
-              setMealType("breakfast"), setIsDisplayed((prev) => !prev)
+              setMealType("breakfast"), setIsModalDisplayed((prev) => !prev)
             )}
           >
             +
@@ -27,7 +27,7 @@ const MealEntryTable = ({
           <button
             className="text-2xl font-bold bg-green-400 rounded-full w-[40px] h-[40px]"
             onClick={() => (
-              setMealType("lunch"), setIsDisplayed((prev) => !prev)
+              setMealType("lunch"), setIsModalDisplayed((prev) => !prev)
             )}
           >
             +
@@ -39,7 +39,7 @@ const MealEntryTable = ({
           <button
             className="text-2xl font-bold bg-green-400 rounded-full w-[40px] h-[40px]"
             onClick={() => (
-              setMealType("dinner"), setIsDisplayed((prev) => !prev)
+              setMealType("dinner"), setIsModalDisplayed((prev) => !prev)
             )}
           >
             +

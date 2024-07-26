@@ -2,7 +2,7 @@ const date = new Date();
 
 const DateWidget = () => {
   return (
-    <div className="border-2 border-black py-2 px-6 rounded-xl text-center relative">
+    <div className="border-2 border-black py-2 px-6 rounded-xl text-center relative -z-10">
       <p className="font-bold text-lg">{date.getDate()}</p>
       <p className=" text-gray-600 text-lg">
         {new Date().toLocaleDateString("en-us", { weekday: "short" })}

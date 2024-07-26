@@ -26,7 +26,7 @@ function App() {
     lunch: [],
     dinner: [],
   });
-  const [isDisplayed, setIsDisplayed] = useState(false);
+  const [isModalDisplayed, setIsModalDisplayed] = useState(false);
   const [mealType, setMealType] = useState("");
 
   useEffect(() => {
@@ -73,11 +73,11 @@ function App() {
               <section className="max-w-[1650px] px-6 ">
                 <AddPostMealModal
                   addNewMeal={addNewMeal}
-                  isDisplayed={isDisplayed}
+                  isModalDisplayed={isModalDisplayed}
                 />
                 <MealEntryTable
                   setMealType={setMealType}
-                  setIsDisplayed={setIsDisplayed}
+                  setIsModalDisplayed={setIsModalDisplayed}
                 />
                 <Meals
                   meals={meals}
