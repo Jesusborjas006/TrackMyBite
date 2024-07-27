@@ -4,11 +4,13 @@ import { MealType } from "../types";
 interface AddPostMealModalProps {
   addNewMeal: (newMeal: MealType) => void;
   isModalDisplayed: boolean;
+  setIsModalDisplayed: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AddPostMealModal = ({
   addNewMeal,
   isModalDisplayed,
+  setIsModalDisplayed,
 }: AddPostMealModalProps) => {
   const [mealInfo, setMealInfo] = useState({
     food: "",
@@ -37,6 +39,11 @@ const AddPostMealModal = ({
     }
   };
 
+  const handleModalClose = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    setIsModalDisplayed(false);
+  };
+
   return (
     <section
       className={
@@ -48,10 +55,16 @@ const AddPostMealModal = ({
       <form
         className={
           isModalDisplayed
-            ? "border flex flex-col p-6 gap-y-4 bg-white shadow-md rounded-xl absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 "
+            ? "border flex flex-col py-4 px-6 gap-y-3 bg-white shadow-md rounded-xl absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 "
             : "hidden"
         }
       >
+        <button
+          className="font-semibold text-2xl self-end hover:text-red-600"
+          onClick={handleModalClose}
+        >
+          X
+        </button>
         <div className="flex flex-col">
           <label>Food:</label>
           <input
