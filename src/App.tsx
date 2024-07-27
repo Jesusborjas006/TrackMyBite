@@ -29,6 +29,8 @@ function App() {
   const [isModalDisplayed, setIsModalDisplayed] = useState(false);
   const [mealType, setMealType] = useState("");
 
+  console.log(detailedMeals);
+
   useEffect(() => {
     const totalCalorieIntake = meals.reduce((acc, currentMeal) => {
       return (acc +=
@@ -80,6 +82,7 @@ function App() {
                 <MealEntryTable
                   setMealType={setMealType}
                   setIsModalDisplayed={setIsModalDisplayed}
+                  detailedMeals={detailedMeals}
                 />
                 <Meals
                   meals={meals}
