@@ -14,8 +14,8 @@ const MealEntryTable = ({
   detailedMeals,
 }: MealEntryTableProps) => {
   return (
-    <div className="shadow-md rounded-xl bg-white w-[300px] mx-auto mt-10">
-      <ul className="py-4 px-6 space-y-4">
+    <div className="shadow-md rounded-xl bg-white w-[800px] mx-auto mt-10">
+      <ul className="py-4 px-6 space-y-3">
         <li className="text-lg font-semibold flex items-center justify-between">
           Breakfast
           <button
@@ -58,6 +58,24 @@ const MealEntryTable = ({
               +
             </button>
           </li>
+          <ul className="[&>*:nth-child(even)]:bg-[#ddd]">
+            {detailedMeals.lunch.map(
+              (food: {
+                id: number;
+                food: string;
+                quantity: number;
+                calories: string;
+              }) => (
+                <li key={food.id} className="p-1">
+                  <span className="flex justify-between">
+                    <p>{food.food}</p>
+                    <p>{food.calories} kcal</p>
+                  </span>
+                  <p className="text-xs">{food.quantity} item</p>
+                </li>
+              )
+            )}
+          </ul>
         </div>
         <hr />
         <li className="text-xl font-semibold flex items-center justify-between">
@@ -71,6 +89,24 @@ const MealEntryTable = ({
             +
           </button>
         </li>
+        <ul className="[&>*:nth-child(even)]:bg-[#ddd]">
+          {detailedMeals.dinner.map(
+            (food: {
+              id: number;
+              food: string;
+              quantity: number;
+              calories: string;
+            }) => (
+              <li key={food.id} className="p-1">
+                <span className="flex justify-between">
+                  <p>{food.food}</p>
+                  <p>{food.calories} kcal</p>
+                </span>
+                <p className="text-xs">{food.quantity} item</p>
+              </li>
+            )
+          )}
+        </ul>
         <hr />
       </ul>
     </div>
