@@ -75,6 +75,7 @@ function App() {
                   addNewMeal={addNewMeal}
                   isModalDisplayed={isModalDisplayed}
                   setIsModalDisplayed={setIsModalDisplayed}
+                  mealType={mealType}
                 />
                 <MealEntryTable
                   setMealType={setMealType}

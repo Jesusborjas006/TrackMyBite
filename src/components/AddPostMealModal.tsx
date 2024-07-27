@@ -5,12 +5,14 @@ interface AddPostMealModalProps {
   addNewMeal: (newMeal: MealType) => void;
   isModalDisplayed: boolean;
   setIsModalDisplayed: React.Dispatch<React.SetStateAction<boolean>>;
+  mealType: string;
 }
 
 const AddPostMealModal = ({
   addNewMeal,
   isModalDisplayed,
   setIsModalDisplayed,
+  mealType,
 }: AddPostMealModalProps) => {
   const [mealInfo, setMealInfo] = useState({
     food: "",
@@ -59,12 +61,15 @@ const AddPostMealModal = ({
             : "hidden"
         }
       >
-        <button
-          className="font-semibold text-2xl self-end hover:text-red-600"
-          onClick={handleModalClose}
-        >
-          X
-        </button>
+        <div className="flex justify-between items-center">
+          <h4 className="text-2xl font-semibold capitalize">{mealType}</h4>
+          <button
+            className="font-semibold text-2xl hover:text-red-600"
+            onClick={handleModalClose}
+          >
+            X
+          </button>
+        </div>
         <div className="flex flex-col">
           <label>Food:</label>
           <input
@@ -79,7 +84,7 @@ const AddPostMealModal = ({
         <div className="flex flex-col">
           <label htmlFor="quantity">Quantity:</label>
           <select
-            className="border border-black ml-1"
+            className="border border-black pl-1"
             id="qauntity"
             name="quantity"
             value={mealInfo.quantity}
@@ -93,7 +98,7 @@ const AddPostMealModal = ({
         <div className="flex flex-col">
           <label htmlFor="calories">Calories Per Item:</label>
           <input
-            className="border border-black ml-1 w-[100px]"
+            className="border border-black pl-1 w-[100px]"
             id="calories"
             type="number"
             name="calories"
