@@ -79,12 +79,23 @@ const MealEntryTable = ({
                 quantity: number;
                 calories: string;
               }) => (
-                <li key={food.id} className="p-1">
-                  <span className="flex justify-between">
+                <li
+                  key={food.id}
+                  className="p-1 flex justify-between items-center "
+                >
+                  <span>
                     <p>{food.food}</p>
-                    <p>{food.quantity * Number(food.calories)} kcal</p>
+                    <p className="text-xs">{food.quantity} item</p>
                   </span>
-                  <p className="text-xs">{food.quantity} item</p>
+                  <span className="flex gap-x-4">
+                    <p>{food.quantity * Number(food.calories)} kcal</p>
+                    <button
+                      className="bg-red-400 px-2 text-sm"
+                      onClick={() => removeItemById("lunch", food.id)}
+                    >
+                      Remove
+                    </button>
+                  </span>
                 </li>
               )
             )}
@@ -110,12 +121,23 @@ const MealEntryTable = ({
               quantity: number;
               calories: string;
             }) => (
-              <li key={food.id} className="p-1">
-                <span className="flex justify-between">
+              <li
+                key={food.id}
+                className="p-1 flex justify-between items-center "
+              >
+                <span>
                   <p>{food.food}</p>
-                  <p>{food.quantity * Number(food.calories)} kcal</p>
+                  <p className="text-xs">{food.quantity} item</p>
                 </span>
-                <p className="text-xs">{food.quantity} item</p>
+                <span className="flex gap-x-4">
+                  <p>{food.quantity * Number(food.calories)} kcal</p>
+                  <button
+                    className="bg-red-400 px-2 text-sm"
+                    onClick={() => removeItemById("dinner", food.id)}
+                  >
+                    Remove
+                  </button>
+                </span>
               </li>
             )
           )}
