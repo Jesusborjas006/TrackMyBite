@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { MealType } from "../types";
-import DateWidget from "./DateWidget";
 
 interface MealsProps {
   meals: [] | MealType[];
@@ -48,8 +47,6 @@ const Meals = ({
 
   return (
     <section className="flex flex-col items-center justify-center mt-10">
-      <h3 className="font-bold text-2xl mb-2">Today's Meals</h3>
-      <DateWidget />
       <ul className="space-y-3 mt-14">{mealElements}</ul>
 
       <div>

@@ -38,7 +38,7 @@ const MealEntryTable = ({
               <li key={food.id} className="p-1">
                 <span className="flex justify-between">
                   <p>{food.food}</p>
-                  <p>{food.calories} kcal</p>
+                  <p>{food.quantity * Number(food.calories)} kcal</p>
                 </span>
                 <p className="text-xs">{food.quantity} item</p>
               </li>
@@ -69,7 +69,7 @@ const MealEntryTable = ({
                 <li key={food.id} className="p-1">
                   <span className="flex justify-between">
                     <p>{food.food}</p>
-                    <p>{food.calories} kcal</p>
+                    <p>{food.quantity * Number(food.calories)} kcal</p>
                   </span>
                   <p className="text-xs">{food.quantity} item</p>
                 </li>
@@ -100,7 +100,7 @@ const MealEntryTable = ({
               <li key={food.id} className="p-1">
                 <span className="flex justify-between">
                   <p>{food.food}</p>
-                  <p>{food.calories} kcal</p>
+                  <p>{food.quantity * Number(food.calories)} kcal</p>
                 </span>
                 <p className="text-xs">{food.quantity} item</p>
               </li>

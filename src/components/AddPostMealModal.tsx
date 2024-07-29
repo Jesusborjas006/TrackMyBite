@@ -38,6 +38,7 @@ const AddPostMealModal = ({
       };
       addNewMeal(newMeal);
       setMealInfo({ food: "", quantity: 1, calories: "" });
+      setIsModalDisplayed(false);
     }
   };
 

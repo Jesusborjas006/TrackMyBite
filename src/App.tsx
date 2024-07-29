@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import AddPostMealModal from "./components/AddPostMealModal";
 import MealEntryTable from "./components/MealEntryTable";
+import DateWidget from "./components/DateWidget";
 
 function App() {
   const [userInfo, setUserInfo] = useState({
@@ -79,6 +80,13 @@ function App() {
                   setIsModalDisplayed={setIsModalDisplayed}
                   mealType={mealType}
                 />
+                <div className="flex flex-col my-10">
+                  <h3 className="font-bold text-2xl  mb-2 text-center">
+                    Today's Meals
+                  </h3>
+                  <DateWidget />
+                </div>
+
                 <MealEntryTable
                   setMealType={setMealType}
                   setIsModalDisplayed={setIsModalDisplayed}
