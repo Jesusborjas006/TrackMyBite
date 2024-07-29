@@ -40,6 +40,7 @@ const AddPostMealModal = ({
       setMealInfo({ food: "", quantity: 1, calories: "" });
       setIsModalDisplayed(false);
     }
+    return;
   };
 
   const handleModalClose = (e: { preventDefault: () => void }) => {

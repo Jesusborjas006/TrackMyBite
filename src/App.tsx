@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { MealType } from "./types";
-import Meals from "./components/Meals";
+// import Meals from "./components/Meals";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
@@ -9,6 +9,7 @@ import EditProfile from "./pages/EditProfile";
 import AddPostMealModal from "./components/AddPostMealModal";
 import MealEntryTable from "./components/MealEntryTable";
 import DateWidget from "./components/DateWidget";
+import { Link } from "react-router-dom";
 
 function App() {
   const [userInfo, setUserInfo] = useState({
@@ -19,9 +20,8 @@ function App() {
     height: "",
     activityLevel: "",
   });
-  const [meals, setMeals] = useState<MealType[]>([]);
   const [remainingCalories, setRemainingCalories] = useState("");
-  const [totalMealCalories, setTotalMealCalories] = useState("");
+  const [mealCaloriesConsumed, setMealCaloriesConsumed] = useState("");
   const [detailedMeals, setDetailedMeals] = useState({
     breakfast: [],
     lunch: [],
@@ -30,22 +30,20 @@ function App() {
   const [isModalDisplayed, setIsModalDisplayed] = useState(false);
   const [mealType, setMealType] = useState("");
 
-  console.log(detailedMeals);
+  console.log(remainingCalories);
 
   useEffect(() => {
-    const totalCalorieIntake = meals.reduce((acc, currentMeal) => {
-      return (acc +=
-        Number(currentMeal.quantity) * Number(currentMeal.calories));
-    }, 0);
-    setRemainingCalories(userInfo.calorieGoal);
-    setTotalMealCalories(String(totalCalorieIntake));
+    const calculateTotalCalories = (meals) => {
+      const allKeyValues = Object.values(meals).flat();
+      const totalCalories = allKeyValues.reduce((acc, currentItem) => {
+        return (acc += Number(currentItem.calories) * currentItem.quantity);
+      }, 0);
 
-    if (!totalCalorieIntake) {
-      return;
-    } else {
-      setRemainingCalories((prev) => String(+prev - totalCalorieIntake));
-    }
-  }, [meals, userInfo.calorieGoal]);
+      setMealCaloriesConsumed(totalCalories);
+      setRemainingCalories(userInfo.calorieGoal - totalCalories);
+    };
+    calculateTotalCalories(detailedMeals);
+  }, [detailedMeals, userInfo.calorieGoal]);
 
   const addNewMeal = (newMeal: MealType) => {
     setDetailedMeals({
@@ -54,12 +52,19 @@ function App() {
     });
   };
 
-  const removeMeal = (id: number) => {
-    const filteredMeals = meals.filter((meal) => {
-      return meal.id !== id;
-    });
-    setMeals(filteredMeals);
-  };
+  let content;
+  if (+remainingCalories === 0) {
+    content = <p>Goal has been met!</p>;
+  } else if (+remainingCalories > 0) {
+    content = <p>Calories Remaining: {remainingCalories}</p>;
+  } else {
+    content = (
+      <p>
+        You're {Math.abs(+userInfo.calorieGoal - +mealCaloriesConsumed)}{" "}
+        calories over the goal!
+      </p>
+    );
+  }
 
   return (
     <main>
@@ -92,13 +97,24 @@ function App() {
                   setIsModalDisplayed={setIsModalDisplayed}
                   detailedMeals={detailedMeals}
                 />
-                <Meals
-                  meals={meals}
-                  removeMeal={removeMeal}
+                <section className="flex flex-col items-center justify-center mt-10">
+                  <div>
+                    <h3 className="mt-10 text-3xl">{content}</h3>
+                    <p>Goal: {userInfo.calorieGoal} calories</p>
+                    <p>Food: {mealCaloriesConsumed} calories</p>
+                    <Link
+                      className="border p-1 bg-black text-white hover:bg-green-900 active:bg-green-300 inline-block mt-4"
+                      to={"/edit/user"}
+                    >
+                      Change Calorie Goal
+                    </Link>
+                  </div>
+                </section>
+                {/* <Meals
                   totalMealCalories={totalMealCalories}
                   calorieGoal={userInfo.calorieGoal}
                   remainingCalories={remainingCalories}
-                />
+                /> */}
               </section>
             </>
           }
