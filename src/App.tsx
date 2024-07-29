@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
 import { MealType } from "./types";
-// import Meals from "./components/Meals";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
-import AddPostMealModal from "./components/AddPostMealModal";
-import MealEntryTable from "./components/MealEntryTable";
-import DateWidget from "./components/DateWidget";
-import { Link } from "react-router-dom";
+import Home from "./pages/Home";
 
 function App() {
   const [userInfo, setUserInfo] = useState({
@@ -59,20 +55,6 @@ function App() {
     }));
   };
 
-  let content;
-  if (+remainingCalories === 0) {
-    content = <p>Goal has been met!</p>;
-  } else if (+remainingCalories > 0) {
-    content = <p>Calories Remaining: {remainingCalories}</p>;
-  } else {
-    content = (
-      <p>
-        You're {Math.abs(+userInfo.calorieGoal - +mealCaloriesConsumed)}{" "}
-        calories over the goal!
-      </p>
-    );
-  }
-
   return (
     <main>
       <Routes>
@@ -85,42 +67,18 @@ function App() {
           element={
             <>
               <Navbar userInfo={userInfo} setUserInfo={setUserInfo} />
-              <section className="max-w-[1650px] px-6 ">
-                <AddPostMealModal
-                  addNewMeal={addNewMeal}
-                  isModalDisplayed={isModalDisplayed}
-                  setIsModalDisplayed={setIsModalDisplayed}
-                  mealType={mealType}
-                />
-                <div className="flex flex-col my-10">
-                  <h3 className="font-bold text-2xl  mb-2 text-center">
-                    Today's Meals
-                  </h3>
-                  <DateWidget />
-                </div>
-
-                <section className="flex">
-                  <MealEntryTable
-                    setMealType={setMealType}
-                    setIsModalDisplayed={setIsModalDisplayed}
-                    detailedMeals={detailedMeals}
-                    removeItemById={removeItemById}
-                  />
-                  <section className="flex flex-col items-center bg-white shadow-md rounded-xl w-[20%] mx-auto text-center py-10 h-fit">
-                    <div>
-                      <h3 className="text-xl mb-4">{content}</h3>
-                      <p>Goal: {userInfo.calorieGoal} calories</p>
-                      <p>Food: {mealCaloriesConsumed} calories</p>
-                      <Link
-                        className="border p-2 bg-black text-white hover:bg-green-900 active:bg-green-300 inline-block mt-4"
-                        to={"/edit/user"}
-                      >
-                        Change Calorie Goal
-                      </Link>
-                    </div>
-                  </section>
-                </section>
-              </section>
+              <Home
+                remainingCalories={remainingCalories}
+                userInfo={userInfo}
+                mealCaloriesConsumed={mealCaloriesConsumed}
+                addNewMeal={addNewMeal}
+                isModalDisplayed={isModalDisplayed}
+                setIsModalDisplayed={setIsModalDisplayed}
+                mealType={mealType}
+                setMealType={setMealType}
+                detailedMeals={detailedMeals}
+                removeItemById={removeItemById}
+              />
             </>
           }
         />
