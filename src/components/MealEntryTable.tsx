@@ -14,7 +14,7 @@ const MealEntryTable = ({
   detailedMeals,
 }: MealEntryTableProps) => {
   return (
-    <div className="shadow-md rounded-xl bg-white w-[800px] mx-auto mt-10">
+    <div className="shadow-md rounded-xl bg-white w-[70%] mx-auto py-4">
       <ul className="py-4 px-6 space-y-3">
         <li className="text-lg font-semibold flex items-center justify-between">
           Breakfast

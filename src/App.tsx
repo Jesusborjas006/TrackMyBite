@@ -92,29 +92,26 @@ function App() {
                   <DateWidget />
                 </div>
 
-                <MealEntryTable
-                  setMealType={setMealType}
-                  setIsModalDisplayed={setIsModalDisplayed}
-                  detailedMeals={detailedMeals}
-                />
-                <section className="flex flex-col items-center justify-center mt-10">
-                  <div>
-                    <h3 className="mt-10 text-3xl">{content}</h3>
-                    <p>Goal: {userInfo.calorieGoal} calories</p>
-                    <p>Food: {mealCaloriesConsumed} calories</p>
-                    <Link
-                      className="border p-1 bg-black text-white hover:bg-green-900 active:bg-green-300 inline-block mt-4"
-                      to={"/edit/user"}
-                    >
-                      Change Calorie Goal
-                    </Link>
-                  </div>
+                <section className="flex">
+                  <MealEntryTable
+                    setMealType={setMealType}
+                    setIsModalDisplayed={setIsModalDisplayed}
+                    detailedMeals={detailedMeals}
+                  />
+                  <section className="flex flex-col items-center bg-white shadow-md rounded-xl w-[20%] mx-auto text-center py-10 h-fit">
+                    <div>
+                      <h3 className="text-xl mb-4">{content}</h3>
+                      <p>Goal: {userInfo.calorieGoal} calories</p>
+                      <p>Food: {mealCaloriesConsumed} calories</p>
+                      <Link
+                        className="border p-2 bg-black text-white hover:bg-green-900 active:bg-green-300 inline-block mt-4"
+                        to={"/edit/user"}
+                      >
+                        Change Calorie Goal
+                      </Link>
+                    </div>
+                  </section>
                 </section>
-                {/* <Meals
-                  totalMealCalories={totalMealCalories}
-                  calorieGoal={userInfo.calorieGoal}
-                  remainingCalories={remainingCalories}
-                /> */}
               </section>
             </>
           }
