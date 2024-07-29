@@ -30,8 +30,6 @@ function App() {
   const [isModalDisplayed, setIsModalDisplayed] = useState(false);
   const [mealType, setMealType] = useState("");
 
-  console.log(remainingCalories);
-
   useEffect(() => {
     const calculateTotalCalories = (meals) => {
       const allKeyValues = Object.values(meals).flat();
@@ -50,6 +48,15 @@ function App() {
       ...detailedMeals,
       [mealType]: [...detailedMeals[mealType], newMeal],
     });
+  };
+
+  const removeItemById = (mealType: string, id: number) => {
+    setDetailedMeals((prevState) => ({
+      ...prevState,
+      [mealType]: prevState[mealType].filter(
+        (item: { id: number }) => item.id !== id
+      ),
+    }));
   };
 
   let content;
@@ -97,6 +104,7 @@ function App() {
                     setMealType={setMealType}
                     setIsModalDisplayed={setIsModalDisplayed}
                     detailedMeals={detailedMeals}
+                    removeItemById={removeItemById}
                   />
                   <section className="flex flex-col items-center bg-white shadow-md rounded-xl w-[20%] mx-auto text-center py-10 h-fit">
                     <div>
