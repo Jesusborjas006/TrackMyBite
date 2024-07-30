@@ -87,7 +87,7 @@ function App() {
           element={
             <>
               <Navbar userInfo={userInfo} setUserInfo={setUserInfo} />
-              <Profile userInfo={userInfo} />{" "}
+              <Profile userInfo={userInfo} />
             </>
           }
         />
