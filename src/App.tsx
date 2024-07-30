@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { MealType } from "./types";
-import AddPostMeal from "./components/AddPostMeal";
-import Meals from "./components/Meals";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
+import Home from "./pages/Home";
 
 function App() {
   const [userInfo, setUserInfo] = useState({
@@ -17,34 +16,43 @@ function App() {
     height: "",
     activityLevel: "",
   });
-  const [meals, setMeals] = useState<MealType[]>([]);
   const [remainingCalories, setRemainingCalories] = useState("");
-  const [totalMealCalories, setTotalMealCalories] = useState("");
+  const [mealCaloriesConsumed, setMealCaloriesConsumed] = useState("");
+  const [detailedMeals, setDetailedMeals] = useState({
+    breakfast: [],
+    lunch: [],
+    dinner: [],
+  });
+  const [isModalDisplayed, setIsModalDisplayed] = useState(false);
+  const [mealType, setMealType] = useState("");
 
   useEffect(() => {
-    const totalCalorieIntake = meals.reduce((acc, currentMeal) => {
-      return (acc +=
-        Number(currentMeal.quantity) * Number(currentMeal.calories));
-    }, 0);
-    setRemainingCalories(userInfo.calorieGoal);
-    setTotalMealCalories(String(totalCalorieIntake));
+    const calculateTotalCalories = (meals) => {
+      const allKeyValues = Object.values(meals).flat();
+      const totalCalories = allKeyValues.reduce((acc, currentItem) => {
+        return (acc += Number(currentItem.calories) * currentItem.quantity);
+      }, 0);
 
-    if (!totalCalorieIntake) {
-      return;
-    } else {
-      setRemainingCalories((prev) => String(+prev - totalCalorieIntake));
-    }
-  }, [meals, userInfo.calorieGoal]);
+      setMealCaloriesConsumed(totalCalories);
+      setRemainingCalories(userInfo.calorieGoal - totalCalories);
+    };
+    calculateTotalCalories(detailedMeals);
+  }, [detailedMeals, userInfo.calorieGoal]);
 
   const addNewMeal = (newMeal: MealType) => {
-    setMeals((prevMeals) => [...prevMeals, newMeal]);
+    setDetailedMeals({
+      ...detailedMeals,
+      [mealType]: [...detailedMeals[mealType], newMeal],
+    });
   };
 
-  const removeMeal = (id: number) => {
-    const filteredMeals = meals.filter((meal) => {
-      return meal.id !== id;
-    });
-    setMeals(filteredMeals);
+  const removeItemById = (mealType: string, id: number) => {
+    setDetailedMeals((prevState) => ({
+      ...prevState,
+      [mealType]: prevState[mealType].filter(
+        (item: { id: number }) => item.id !== id
+      ),
+    }));
   };
 
   return (
@@ -59,16 +67,18 @@ function App() {
           element={
             <>
               <Navbar userInfo={userInfo} setUserInfo={setUserInfo} />
-              <section className="max-w-[1650px] px-6 ">
-                <AddPostMeal addNewMeal={addNewMeal} />
-                <Meals
-                  meals={meals}
-                  removeMeal={removeMeal}
-                  totalMealCalories={totalMealCalories}
-                  calorieGoal={userInfo.calorieGoal}
-                  remainingCalories={remainingCalories}
-                />
-              </section>
+              <Home
+                remainingCalories={remainingCalories}
+                userInfo={userInfo}
+                mealCaloriesConsumed={mealCaloriesConsumed}
+                addNewMeal={addNewMeal}
+                isModalDisplayed={isModalDisplayed}
+                setIsModalDisplayed={setIsModalDisplayed}
+                mealType={mealType}
+                setMealType={setMealType}
+                detailedMeals={detailedMeals}
+                removeItemById={removeItemById}
+              />
             </>
           }
         />
@@ -77,7 +87,7 @@ function App() {
           element={
             <>
               <Navbar userInfo={userInfo} setUserInfo={setUserInfo} />
-              <Profile userInfo={userInfo} />{" "}
+              <Profile userInfo={userInfo} />
             </>
           }
         />
